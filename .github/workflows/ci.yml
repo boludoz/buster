@@ -5,7 +5,7 @@ on: push
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - name: Clone repository
         uses: actions/checkout@v2
@@ -36,7 +36,7 @@ jobs:
           retention-days: 1
   release:
     name: Release on GitHub
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     needs: [build]
     if: startsWith(github.ref, 'refs/tags/v')
     steps:
@@ -62,7 +62,6 @@ jobs:
           release_name: ${{ steps.release_info.outputs.TAG }}
           body: |
             Download and install the extension from the [extension store](https://github.com/dessant/buster#readme) of your browser.
-
             Learn more about this release from the [changelog](https://github.com/dessant/buster/blob/master/CHANGELOG.md#changelog).
           draft: true
       - name: Upload GitHub release assets
